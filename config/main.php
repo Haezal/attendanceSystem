@@ -69,6 +69,10 @@ $config = [
             'defaultRoute' => 'profile',
             'admins'       => ['admin']
         ],
+        'rbac' => [
+            'class' => 'dektrium\rbac\Module',
+            'layout' => '@admin-views/layouts/main',
+        ],
     ],
     'params'     => [
         'appName'        => getenv('APP_NAME'),
