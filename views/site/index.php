@@ -1,6 +1,64 @@
 <?php
+use yii\web\View;
 /* @var $this yii\web\View */
-$this->title .= 'Yii 2.0 App Template';
+$this->title .= getenv('APP_NAME');
+
+// load maps api
+$this->registerJsFile("https://maps.googleapis.com/maps/api/js");
+
+// load js script
+$this->registerJs("
+
+    var x = document.getElementById('alert');
+
+    getLocation();
+
+    function getLocation(){
+        if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else { 
+            x.innerHTML='GeoLocation is not supported by this browser. Please try another latest browser.';
+        }
+    } // end function
+
+function showPosition(position) {
+    lat = position.coords.latitude;
+    lon = position.coords.longitude;
+    latlon = new google.maps.LatLng(lat, lon);
+    mapholder = document.getElementById('mapholder');
+    // mapholder.style.height = '250px';
+    // mapholder.style.width = '500px';
+
+    var myOptions = {
+        center:latlon,zoom:14,
+        mapTypeId:google.maps.MapTypeId.ROADMAP,
+        mapTypeControl:false,
+        navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+    }
+    
+    var map = new google.maps.Map(document.getElementById('mapholder'), myOptions);
+    var marker = new google.maps.Marker({position:latlon,map:map,title:'You are here!'});
+
+    x.innerHTML = '<code>Latitude: ' + lat + ', ' + lon + '</code>';    
+}
+
+    function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                x.innerHTML = 'User denied the request for Geolocation.'
+                break;
+            case error.POSITION_UNAVAILABLE:
+                x.innerHTML = 'Location information is unavailable.'
+                break;
+            case error.TIMEOUT:
+                x.innerHTML = 'The request to get user location timed out.'
+                break;
+            case error.UNKNOWN_ERROR:
+                x.innerHTML = 'An unknown error occurred.'
+                break;
+        }
+    } // end function
+", View::POS_END, 'geoLocation');
 ?>
 <div class="site-index ">
 
@@ -62,6 +120,37 @@ $this->title .= 'Yii 2.0 App Template';
     <div class="blurb cite">
         <div class="container">
             <div class="row">
+                <div class="col-lg-4">
+                    <h2>IP Address Information</h2>
+                    <address>
+                        <label>IP Address</label> : 
+                        <?php echo $ipInfo->ip; ?>
+                    </address>
+                    <address>
+                        <label>City</label> : 
+                        <?php echo $ipInfo->city; ?>
+                    </address>
+                    <address>
+                        <label>Region</label> : 
+                        <?php echo $ipInfo->region; ?>
+                    </address>
+                    <address>
+                        <label>Country</label> : 
+                        <?php echo $ipInfo->country; ?>
+                    </address>
+                    <address>
+                        <label>Postal</label> : 
+                        <?php echo $ipInfo->postal; ?>
+                    </address>
+                </div>
+                <div class="col-lg-8">
+                    <h2>Your Current Location</h2>
+                    <div id="mapholder" class="col-lg-12" style="height:300px;">Loading Maps.. </div>
+                    <div id="alert">Loading Current Location..</div>
+                </div>
+
+            </div>
+<!--             <div class="row">
                 <div class="col-md-12 text-center">
                     <p class="lead">
                         This is the About page. You may modify the following file to customize its content:
@@ -71,7 +160,7 @@ $this->title .= 'Yii 2.0 App Template';
 
                     <p>Phundament</p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 

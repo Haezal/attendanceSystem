@@ -53,7 +53,17 @@ class SiteController extends Controller
             ],
             'description'
         );
-        return $this->render('index');
+
+
+        // get user IP address
+        $ip = Yii::$app->getIP->get();
+
+        // get ip information from ipinfo.io
+        $ipInfo = json_decode(file_get_contents("http://ipinfo.io/{$ip}/json"));
+
+        return $this->render('index', [
+            'ipInfo'=>$ipInfo,
+        ]);
     }
 
     /**

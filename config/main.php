@@ -48,7 +48,9 @@ $config = [
                 ],
             ],
         ],
-
+        'getIP' => [
+            'class' => 'app\components\GetIPComponent',
+        ],
     ],
     'modules'    => [
         'admin' => [
