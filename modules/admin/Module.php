@@ -48,6 +48,22 @@ class Module extends \yii\base\Module
 
         $menuItems = ArrayHelper::merge($menuItems, $autoMenuItems);
 
+        // custom add other menu
+        $otherMenuItems = [];
+        $otherMenuItems = [
+            [
+                'label'=>'<i class="fa fa-cube"></i> <span>State</span>',
+                'url'=>['/state'],
+            ],
+            [
+                'label'=>'<i class="fa fa-cube"></i> <span>Organization</span>',
+                'url'=>['/organization'],
+            ],
+        ];
+
+        $menuItems = ArrayHelper::merge($menuItems, $otherMenuItems);
+
+
         return $menuItems;
     }
 
