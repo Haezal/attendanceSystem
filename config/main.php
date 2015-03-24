@@ -44,7 +44,7 @@ $config = [
             'theme' => [
                 'pathMap' => [
                     '@vendor/dektrium/yii2-user/views' => '@app/views/user',
-                    '@yii/gii/views/layouts'           => '@admin-views/layouts',
+                    // '@yii/gii/views/layouts'           => '@admin-views/layouts',
                 ],
             ],
         ],
