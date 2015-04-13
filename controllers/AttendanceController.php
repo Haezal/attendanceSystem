@@ -13,4 +13,14 @@ class AttendanceController extends \yii\web\Controller
     {
         return $this->render('clockOut');
     }
+
+    public function actionList(){
+
+    	return $this->render('list');
+    }
+
+    public function actionView(){
+    	return $this->render('view');
+
+    }
 }
