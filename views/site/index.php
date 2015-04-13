@@ -69,18 +69,6 @@ function showPosition(position) {
 
             <h2 class="lead">Up and running.</h2>
 
-            <div>
-                <a href="<?= \yii\helpers\Url::to('http://phundament.com/docs/31-extension-management.md') ?>"
-                   target="_blank"
-                   class="btn btn-primary btn-lg">Install Packages</a>
-                <a href="<?= \yii\helpers\Url::to('http://phundament.com/docs/41-code-generation.md') ?>"
-                   target="_blank"
-                   class="btn btn-primary btn-lg">Generate Code</a>
-                <a href="<?= \yii\helpers\Url::to('http://phundament.com/docs/30-customize.md') ?>"
-                   target="_blank"
-                   class="btn btn-primary btn-lg">Customize App</a>
-            </div>
-
         </div>
     </div>
 
@@ -150,18 +138,6 @@ function showPosition(position) {
                 </div>
 
             </div>
-<!--             <div class="row">
-                <div class="col-md-12 text-center">
-                    <p class="lead">
-                        This is the About page. You may modify the following file to customize its content:
-
-
-                        <code><?= __FILE__ ?></code></p>
-
-                    <p>Phundament</p>
-                </div>
-            </div> -->
         </div>
     </div>
-
 </div>
